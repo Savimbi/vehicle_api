@@ -25,8 +25,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 @EnableJpaAuditing
 @EnableEurekaClient
 public class VehiclesApiApplication {
-    @Autowired
-    LoadBalancerClient loadBalancerClient;
 
     public static void main(String[] args) {
         SpringApplication.run(VehiclesApiApplication.class, args);
@@ -70,11 +68,6 @@ public class VehiclesApiApplication {
      */
 
 
-    @Bean(name="pricing")
-    @LoadBalanced
-    public WebClient webClientPricing(@Value("${pricing-service-name}") String service_name) {
-        ServiceInstance instance = loadBalancerClient.choose(service_name);
-        return WebClient.create(instance.getUri().toString());
-    }
+    @Bean(name="pricing")public WebClient webClientPricing(@Value("${pricing.endpoint}") String service_name) { return WebClient.create(service_name);}
 
 }
