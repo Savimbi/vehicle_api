@@ -97,6 +97,7 @@ public class CarService {
                         carToBeUpdated.setModifiedAt(LocalDateTime.now());
                         carToBeUpdated.setLocation(car.getLocation());
                         carToBeUpdated.setCondition(car.getCondition());
+                        carToBeUpdated.setPrice(car.getPrice());
                         return repository.save(carToBeUpdated);
                     }).orElseThrow(CarNotFoundException::new);
         }
